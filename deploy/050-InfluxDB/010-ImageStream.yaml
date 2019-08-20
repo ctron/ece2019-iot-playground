@@ -1,0 +1,14 @@
+kind: ImageStream
+apiVersion: v1
+metadata:
+ name: influxdb
+ labels:
+   app: influxdb
+spec:
+ tags:
+ - from:
+     kind: DockerImage
+     name: influxdb:1.7-alpine
+   name: "latest"
+   importPolicy:
+     scheduled: true

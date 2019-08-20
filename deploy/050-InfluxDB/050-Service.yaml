@@ -1,0 +1,20 @@
+kind: Service
+apiVersion: v1
+metadata:
+ labels:
+   app: influxdb
+   deploymentconfig: influxdb
+ name: influxdb
+spec:
+ ports:
+ - name: admin
+   port: 8083
+   protocol: TCP
+   targetPort: 8083
+ - name: api
+   port: 8086
+   protocol: TCP
+   targetPort: 8086
+ selector:
+   app: influxdb
+   deploymentconfig: influxdb

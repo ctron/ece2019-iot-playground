@@ -1,0 +1,106 @@
+kind: DeploymentConfig
+apiVersion: v1
+metadata:
+ name: influxdb
+ labels:
+   app: influxdb
+   deploymentconfig: influxdb
+spec:
+ replicas: 1
+ selector:
+   app: influxdb
+   deploymentconfig: influxdb
+ strategy:
+   type: Recreate
+   recreateParams:
+     timeoutSeconds: 3600
+ triggers:
+   - type: ConfigChange
+   - type: ImageChange
+     imageChangeParams:
+       automatic: true
+       containerNames:
+         - influxdb
+       from:
+         kind: ImageStreamTag
+         name: influxdb:latest
+ template:
+   metadata:
+     labels:
+       app: influxdb
+       deploymentconfig: influxdb
+   spec:
+     containers:
+     - name: influxdb
+       image: influxdb
+       imagePullPolicy: Always
+       args:
+       - -config
+       - /etc/config/influxdb.conf
+       env:
+       - name: INFLUXDB_DB
+         value: iot
+       - name: INFLUXDB_ADMIN_USER
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: admin.username
+       - name: INFLUXDB_ADMIN_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: admin.password
+       - name: INFLUXDB_USER
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: app.username
+       - name: INFLUXDB_USER_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: app.password
+       - name: INFLUXDB_READ_USER
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: read.username
+       - name: INFLUXDB_READ_USER_PASSWORD
+         valueFrom:
+           secretKeyRef:
+             name: influxdb-secret
+             key: read.password
+       readinessProbe:
+         initialDelaySeconds: 5
+         periodSeconds: 5
+         tcpSocket:
+           port: 8086
+         timeoutSeconds: 1
+       livenessProbe:
+         initialDelaySeconds: 20
+         periodSeconds: 9
+         tcpSocket:
+           port: 8086
+         timeoutSeconds: 1
+       ports:
+       - containerPort: 8086
+         name: api
+         protocol: TCP
+       - containerPort: 8083
+         name: admin
+         protocol: TCP
+       resources:
+         limits:
+           memory: 2Gi
+       volumeMounts:
+       - mountPath: /var/lib/influxdb
+         name: influxdb-storage
+       - mountPath: /etc/config
+         name: conf
+     volumes:
+     - name: influxdb-storage
+       persistentVolumeClaim:
+         claimName: influxdb-pvc
+     - name: conf
+       configMap:
+         name: influxdb-config

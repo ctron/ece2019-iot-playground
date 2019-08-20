@@ -1,0 +1,23 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: telemetry-bridge
+  labels:
+    app: telemetry-bridge
+spec:
+  triggers: 
+    - type: ImageChange
+  source: 
+    git:
+      uri: "https://github.com/ctron/hono-kafka-bridge"
+      ref: master
+  strategy: 
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: fuse7-java-openshift:1.2
+  output: 
+    to:
+      kind: ImageStreamTag
+      name: telemetry-bridge:latest

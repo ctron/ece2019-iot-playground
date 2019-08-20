@@ -1,0 +1,72 @@
+kind: DeploymentConfig
+apiVersion: apps.openshift.io/v1
+metadata:
+  name: telemetry-bridge
+  labels:
+    app: telemetry-bridge
+    deployment: telemetry-bridge
+spec:
+  template: 
+    metadata:
+      labels:
+        app: telemetry-bridge
+        deployment: telemetry-bridge
+    spec:
+      containers:
+        - name: bridge
+          image: telemetry-bridge
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: IOT_TENANT
+              valueFrom:
+                configMapKeyRef:
+                  name: telemetry-bridge
+                  key: iot.tenant
+            - name: AMQP_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: telemetry-bridge
+                  key: amqp.host
+            - name: AMQP_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: telemetry-bridge
+                  key: amqp.username
+            - name: AMQP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: telemetry-bridge
+                  key: amqp.password
+            - name: KAFKA_PROJECT
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.namespace
+            - name: KAFKA_CLUSTER_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: telemetry-bridge
+                  key: kafka.cluster.name
+          ports:
+            - containerPort: 8778
+              protocol: TCP
+              name: jolokia
+          volumeMounts:
+      volumes:
+
+  triggers:
+    - type: ConfigChange
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - bridge
+        from:
+          kind: ImageStreamTag
+          name: telemetry-bridge:latest
+
+  strategy: 
+    type: Rolling
+  replicas: 1
+  selector:
+    app: telemetry-bridge
+    deployment: telemetry-bridge
