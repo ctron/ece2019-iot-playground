@@ -4,6 +4,6 @@ metadata:
    name: telemetry-bridge
 data:
   iot.tenant: ece2019.iot
-  amqp.host: messaging-15wlsrfm2l.enmasse-infra.svc
+  amqp.host: messaging-15wlsrfm2l.enmasse-infra.svc # change me
   kafka.cluster.name: iot-cluster
   kafka.topic: pax-counters

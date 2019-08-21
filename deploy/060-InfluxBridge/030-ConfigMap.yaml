@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+   name: influx-bridge
+data:
+  kafka.groupId: influx-bridge
+  influxdb.host: influxdb

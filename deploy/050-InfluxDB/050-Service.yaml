@@ -7,10 +7,6 @@ metadata:
  name: influxdb
 spec:
  ports:
- - name: admin
-   port: 8083
-   protocol: TCP
-   targetPort: 8083
  - name: api
    port: 8086
    protocol: TCP

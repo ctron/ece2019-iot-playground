@@ -3,6 +3,7 @@ apiVersion: v1
 metadata:
   name: influxdb-config
 data:
+  databaseName: iot
   influxdb.conf: |+
     reporting-disabled = true
     bind-address = ":8088"
