@@ -1,0 +1,12 @@
+apiVersion: 1
+
+datasources:
+- name: IoT
+  type: influxdb
+  access: proxy
+  database: $DS_DATABASE
+  url: http://influxdb:8086
+  user: $DS_USERNAME
+  secureJsonData:
+    password: $DS_PASSWORD
+  editable: false

@@ -33,7 +33,7 @@ spec:
      containers:
      - name: influxdb
        image: influxdb
-       imagePullPolicy: Always
+       imagePullPolicy: IfNotPresent
        args:
        - -config
        - /etc/config/influxdb.conf

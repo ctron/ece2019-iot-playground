@@ -19,4 +19,15 @@ Look for the `serverHost` field, where the `name` field is `messaging`, e.g. `me
 
 ## InfluxDB
 
-Edit the `030-Secret.yaml` to add proper passwords.
+Edit the file `030-Secret.yaml` to add proper passwords.
+
+## Grafana
+
+Edit the file `030-Secret.yaml` to add proper passwords.
+
+Deploy with:
+
+    oc create configmap grafana-datasources --from-file=070-Grafana/config/datasources
+    oc create configmap grafana-dashboard-providers --from-file=070-Grafana/config/dashboard-providers
+    oc create configmap grafana-dashboards --from-file=070-Grafana/config/dashboards
+    oc apply -f 070-Grafana

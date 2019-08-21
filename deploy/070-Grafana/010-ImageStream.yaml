@@ -1,0 +1,14 @@
+kind: ImageStream
+apiVersion: v1
+metadata:
+ name: grafana
+ labels:
+   app: grafana
+spec:
+ tags:
+ - from:
+     kind: DockerImage
+     name: grafana/grafana:6.3.3
+   name: "latest"
+   importPolicy:
+     scheduled: true
