@@ -15,7 +15,6 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "id": 1,
   "links": [],
   "panels": [
     {
@@ -138,6 +137,7 @@
       }
     }
   ],
+  "refresh": "1m",
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
@@ -145,7 +145,7 @@
     "list": []
   },
   "time": {
-    "from": "now-1h",
+    "from": "now-6h",
     "to": "now"
   },
   "timepicker": {
@@ -165,5 +165,5 @@
   "timezone": "",
   "title": "PAX",
   "uid": "tWSSnjOWk",
-  "version": 10
+  "version": 11
 }
