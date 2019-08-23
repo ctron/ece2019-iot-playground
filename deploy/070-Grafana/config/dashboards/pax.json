@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1566489782827,
+  "iteration": 1566554081167,
   "links": [],
   "panels": [
     {
@@ -33,7 +33,7 @@
         "y": 0
       },
       "id": 2,
-      "interval": "5m",
+      "interval": "",
       "legend": {
         "avg": false,
         "current": false,
@@ -74,7 +74,7 @@
             },
             {
               "params": [
-                "null"
+                "none"
               ],
               "type": "fill"
             }
@@ -95,6 +95,12 @@
               {
                 "params": [],
                 "type": "mean"
+              },
+              {
+                "params": [
+                  10
+                ],
+                "type": "moving_average"
               }
             ]
           ],
@@ -206,5 +212,5 @@
   "timezone": "",
   "title": "PAX",
   "uid": "tWSSnjOWk",
-  "version": 12
+  "version": 13
 }
