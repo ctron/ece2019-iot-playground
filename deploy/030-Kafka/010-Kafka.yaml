@@ -21,9 +21,15 @@ spec:
       size: 10Gi
       deleteClaim: true
     version: 2.2.1
+    template:
+      pod:
+        securityContext: {}
   zookeeper:
     replicas: 1
     storage:
       type: persistent-claim
       size: 1Gi
       deleteClaim: true
+    template:
+      pod:
+        securityContext: {}
