@@ -15,7 +15,7 @@
   "editable": true,
   "gnetId": null,
   "graphTooltip": 0,
-  "iteration": 1572514597188,
+  "id": 4,
   "links": [],
   "panels": [
     {
@@ -27,13 +27,12 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 10,
+        "h": 9,
         "w": 24,
         "x": 0,
         "y": 0
       },
       "id": 2,
-      "interval": "",
       "legend": {
         "avg": false,
         "current": false,
@@ -68,18 +67,12 @@
             },
             {
               "params": [
-                "device"
-              ],
-              "type": "tag"
-            },
-            {
-              "params": [
-                "none"
+                "linear"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "pax",
+          "measurement": "air",
           "orderByTime": "ASC",
           "policy": "autogen",
           "refId": "A",
@@ -88,7 +81,7 @@
             [
               {
                 "params": [
-                  "wifi"
+                  "temp"
                 ],
                 "type": "field"
               },
@@ -104,20 +97,14 @@
               }
             ]
           ],
-          "tags": [
-            {
-              "key": "device",
-              "operator": "=~",
-              "value": "/^$device$/"
-            }
-          ]
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "PAX",
+      "title": "Temperature",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -133,11 +120,11 @@
       },
       "yaxes": [
         {
-          "decimals": 0,
-          "format": "short",
-          "label": "",
+          "decimals": null,
+          "format": "celsius",
+          "label": null,
           "logBase": 1,
-          "max": null,
+          "max": "40",
           "min": "0",
           "show": true
         },
@@ -164,10 +151,10 @@
       "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 6,
+        "h": 8,
         "w": 24,
         "x": 0,
-        "y": 10
+        "y": 9
       },
       "id": 4,
       "legend": {
@@ -198,56 +185,50 @@
           "groupBy": [
             {
               "params": [
-                "1h"
+                "$__interval"
               ],
               "type": "time"
             },
             {
               "params": [
-                "null"
+                "linear"
               ],
               "type": "fill"
             }
           ],
-          "measurement": "pax",
+          "measurement": "air",
           "orderByTime": "ASC",
-          "policy": "default",
+          "policy": "autogen",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "wifi"
+                  "airq"
                 ],
                 "type": "field"
               },
               {
                 "params": [],
-                "type": "count"
+                "type": "mean"
               },
               {
                 "params": [
-                  " / 60"
+                  10
                 ],
-                "type": "math"
+                "type": "moving_average"
               }
             ]
           ],
-          "tags": [
-            {
-              "key": "device",
-              "operator": "=~",
-              "value": "/^$device$/"
-            }
-          ]
+          "tags": []
         }
       ],
       "thresholds": [],
       "timeFrom": null,
       "timeRegions": [],
       "timeShift": null,
-      "title": "Measurements",
+      "title": "Air Quality",
       "tooltip": {
         "shared": true,
         "sort": 0,
@@ -263,12 +244,11 @@
       },
       "yaxes": [
         {
-          "decimals": 0,
-          "format": "opm",
-          "label": "",
+          "format": "short",
+          "label": null,
           "logBase": 1,
           "max": null,
-          "min": "0",
+          "min": null,
           "show": true
         },
         {
@@ -286,40 +266,11 @@
       }
     }
   ],
-  "refresh": "1m",
   "schemaVersion": 19,
   "style": "dark",
   "tags": [],
   "templating": {
-    "list": [
-      {
-        "allValue": null,
-        "current": {
-          "text": "All",
-          "value": [
-            "$__all"
-          ]
-        },
-        "datasource": "IoT",
-        "definition": "SHOW TAG VALUES WITH KEY = \"device\"",
-        "hide": 0,
-        "includeAll": true,
-        "label": null,
-        "multi": true,
-        "name": "device",
-        "options": [],
-        "query": "SHOW TAG VALUES WITH KEY = \"device\"",
-        "refresh": 2,
-        "regex": "",
-        "skipUrlSync": false,
-        "sort": 0,
-        "tagValuesQuery": "",
-        "tags": [],
-        "tagsQuery": "",
-        "type": "query",
-        "useTags": false
-      }
-    ]
+    "list": []
   },
   "time": {
     "from": "now/d",
@@ -340,7 +291,7 @@
     ]
   },
   "timezone": "",
-  "title": "PAX",
-  "uid": "tWSSnjOWk",
-  "version": 14
+  "title": "Air Quality & Temperature",
+  "uid": "iMlOJ9TWk",
+  "version": 8
 }
