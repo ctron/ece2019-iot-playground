@@ -3,7 +3,7 @@
 This repository contains the cloud side deployment we for the AMQ Online IoT
 setup at EclipseCon Europe 2019.
 
-![Overview](images/overview.svg "Overview")
+<img src="/images/overview.svg" width="100%" alt="Overview">
 
 ## Installation
 
