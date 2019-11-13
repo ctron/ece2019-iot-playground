@@ -5,6 +5,12 @@ setup at EclipseCon Europe 2019.
 
 ![Overview](images/overview.svg "Overview")
 
+## Installation
+
+Before deploying the configuration in this repository, you need to install either
+[AMQ Online](https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html-single/installing_and_managing_amq_online_on_openshift/index#installing-messaging) and [AMQ Streams](https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/using_amq_streams_on_openshift/index), or [EnMasse](https://enmasse.io/) and [Strimzi](https://strimzi.io/). You will also need to [configure
+the IoT infrastructure](https://access.redhat.com/documentation/en-us/red_hat_amq/7.5/html/evaluating_amq_online_on_openshift/assembly-iot-messaging-iot) of AMQ Online.
+
 **Note:** It is not possible to directly deploy the YAML files. Some of the files
           need to be updated with the proper passwords. File which need to be updated
           have the suffix `.in`. If you fill in the information, and rename them to `.yaml`,
