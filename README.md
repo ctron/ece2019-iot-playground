@@ -2,22 +2,39 @@
 
 ## Things Network gateway
 
-    hat device create thing-gateway
-    hat cred set-password thing-gateway gateway <password>
+First register the gateway and set credentials:
+
+    hat device create ttn-gateway
+    hat cred set-password ttn-gateway gateway <password>
 
 ## Thing Network integration
 
-Type: HTTP
+<dl>
 
-URL:
+<dt>Type</dt><dd>HTTP</dd>
+
+<dt>URL</dt>
+
+<dd>
 
     https://iot-lorawan-adapter-enmasse-infra.apps.<my.cluster>/ttn
 
-Authentication header:
+</dd>
 
-    echo "Basic $(echo -n "gateway@ece2019.iot:<password>" | base64 -w0)"
+<dt>Authentication header:</dt>
+
+<dd>
+
+    echo "Basic $(echo -n "gateway@<k8s-ns>.iot:<password>" | base64 -w0)"
+
+</dd>
+
+</dl>
 
 ## Provision a new device
 
-    hat device create <device-eui> '{"via":["thing-gateway"]}'
-    hat device update <device-eui> '{"via":["thing-gateway"]}' # need to fix bug!
+    hat device create <device-eui> '{"via":["ttn-gateway"]}'
+
+e.g.:
+
+    hat device create 0123456789ABCDEF '{"via":["ttn-gateway"]}'
