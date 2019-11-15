@@ -5,6 +5,8 @@ metadata:
   labels:
     app: telemetry-bridge
     deploymentconfig: telemetry-bridge
+  annotations:
+    app.openshift.io/connects-to: iot-cluster-kafka
 spec:
   template: 
     metadata:

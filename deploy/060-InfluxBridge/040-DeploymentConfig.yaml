@@ -5,6 +5,8 @@ metadata:
   labels:
     app: influx-bridge
     deploymentconfig: influx-bridge
+  annotations:
+    app.openshift.io/connects-to: "influxdb,iot-cluster-kafka"
 spec:
   template: 
     metadata:

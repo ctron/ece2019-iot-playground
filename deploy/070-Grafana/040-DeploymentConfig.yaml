@@ -1,10 +1,12 @@
 kind: DeploymentConfig
 apiVersion: v1
 metadata:
- name: grafana
- labels:
-   app: grafana
-   deploymentconfig: grafana
+  name: grafana
+  labels:
+    app: grafana
+    deploymentconfig: grafana
+  annotations:
+    app.openshift.io/connects-to: influxdb
 spec:
  replicas: 1
  selector:
