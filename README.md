@@ -57,4 +57,12 @@ Each sensor needs to be registered with Hono as well:
 
 e.g.:
 
-    hat device create 0123456789ABCDEF '{"via":["ttn-gateway"]}'
+    hat device create 0123456789ABCDEF '{"via":["ttn-gateway"], "defaults":{"deviceAlias": "Device #X"}}'
+
+## Also see
+
+This repository sets up OpenShift to build a bunch of other projects:
+
+* https://github.com/ctron/hono-kafka-bridge
+* https://github.com/ctron/hono-kafka-bridge-quarkus
+* https://github.com/ctron/kafka-influxdb-bridge
