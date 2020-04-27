@@ -1,0 +1,42 @@
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: telemetry-bridge-quarkus
+  labels:
+    app: telemetry-bridge
+spec:
+---
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: telemetry-bridge-quarkus-app
+  labels:
+    app: telemetry-bridge
+spec:
+---
+kind: ImageStream
+apiVersion: v1
+metadata:
+ name: quarkus-native-s2i
+spec:
+ tags:
+ - name: "20.0"
+   from:
+     kind: DockerImage
+     name: quay.io/quarkus/ubi-quarkus-native-s2i:20.0.0-java11
+   importPolicy:
+     scheduled: true
+---
+kind: ImageStream
+apiVersion: v1
+metadata:
+ name: ubi-minimal
+spec:
+ tags:
+ - name: "latest"
+   from:
+     kind: DockerImage
+     name: registry.access.redhat.com/ubi8/ubi-minimal:latest
+   importPolicy:
+     scheduled: true

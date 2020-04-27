@@ -1,0 +1,57 @@
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: telemetry-bridge-quarkus
+  labels:
+    app: telemetry-bridge
+spec:
+  triggers: 
+    - type: ImageChange
+  source: 
+    git:
+      uri: "https://github.com/ctron/hono-kafka-bridge-quarkus"
+      ref: master
+  strategy: 
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        name: quarkus-native-s2i:20.0
+  output: 
+    to:
+      kind: ImageStreamTag
+      name: telemetry-bridge-quarkus:latest
+---
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: telemetry-bridge-quarkus-app
+  labels:
+    app: telemetry-bridge
+spec:
+  triggers: 
+    - type: ImageChange
+  source:
+    type: Dockerfile
+    dockerfile: |
+      FROM registry.access.redhat.com/ubi8/ubi-minimal:latest
+      COPY application /application
+      CMD /application
+      EXPOSE 8080
+    images:
+    - as: null
+      from:
+        kind: ImageStreamTag
+        name: telemetry-bridge-quarkus:latest
+      paths:
+      - destinationDir: .
+        sourcePath: /home/quarkus/application
+  strategy: 
+    dockerStrategy:
+      from:
+        kind: ImageStreamTag
+        name: ubi-minimal:latest
+  output: 
+    to:
+      kind: ImageStreamTag
+      name: telemetry-bridge-quarkus-app:latest
